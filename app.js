@@ -16,15 +16,19 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  res.send({ success: true, author: "Ridwan", contact: "6285156008163" });
+  return res.status(200).json({
+    status: true,
+    author: "Ridwan",
+    contact: "6285156008163"
+  });
 });
 
 // User Agent Parser
 app.get("/ua", function (req, res) {
   const agent = req.query.agent;
   const ua = parser(agent || req.headers["user-agent"]);
-  res.send({
-    success: true,
+  return res.status(200).json({
+    status: true,
     result: {
       user_agent: `${ua.ua}`,
       browser_name: `${ua.browser.name}`,

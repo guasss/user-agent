@@ -18,34 +18,24 @@ app.use(
 // User Agent Parser
 app.get("/ua", function (req, res) {
   const agent = req.query.ua;
-  const apikey = req.query.apikey;
-
-  if (apikey) {
-    if (apikey == "apikey") {
-      const ua = parser(agent || req.headers["user-agent"]);
-      res.send({
-        success: true,
-        result: {
-          user_agent: `${ua.ua}`,
-          browser_name: `${ua.browser.name}`,
-          browser_version: `${ua.browser.version}`,
-          browser_major: `${ua.browser.major}`,
-          engine_name: `${ua.engine.name}`,
-          engine_version: `${ua.engine.version}`,
-          os_name: `${ua.os.name}`,
-          os_version: `${ua.os.version}`,
-          device_vendor: `${ua.device.vendor}`,
-          device_model: `${ua.device.model}`,
-          device_type: `${ua.device.type}`,
-          cpu_architecture: `${ua.cpu.architecture}`,
-        },
-      });
-    } else {
-      res.send({ success: false, result: "Invalid Apikey!" });
-    }
-  } else {
-    res.send({ success: false, result: "Invalid Parameter!" });
-  }
+  const ua = parser(agent || req.headers["user-agent"]);
+  res.send({
+    success: true,
+    result: {
+      user_agent: `${ua.ua}`,
+      browser_name: `${ua.browser.name}`,
+      browser_version: `${ua.browser.version}`,
+      browser_major: `${ua.browser.major}`,
+      engine_name: `${ua.engine.name}`,
+      engine_version: `${ua.engine.version}`,
+      os_name: `${ua.os.name}`,
+      os_version: `${ua.os.version}`,
+      device_vendor: `${ua.device.vendor}`,
+      device_model: `${ua.device.model}`,
+      device_type: `${ua.device.type}`,
+      cpu_architecture: `${ua.cpu.architecture}`,
+    },
+  });
 });
 
 server.listen(port, function () {

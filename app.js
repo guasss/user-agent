@@ -1,7 +1,6 @@
 const http = require("http");
 const express = require("express");
 const parser = require("ua-parser-js");
-const { CekML } = require("./src/cek-game");
 
 // Setting App
 const app = express();
@@ -15,47 +14,6 @@ app.use(
     extended: true,
   })
 );
-
-// Cek ID Game
-app.get("/ml", async (req, res) => {
-  const gameID = req.query.user;
-  const zoneID = req.query.zone;
-  const apikey = req.query.apikey;
-
-  if (apikey && gameID && zoneID) {
-    if (apikey == "apikey") {
-      axios
-        .post(
-          "https://api.duniagames.co.id/api/transaction/v1/top-up/inquiry/store",
-          {
-            productId: 1,
-            itemId: 2,
-            catalogId: 57,
-            paymentId: 741,
-            gameId: "364591892",
-            zoneId: "3728",
-            product_ref: "REG",
-            product_ref_denom: "REG",
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
-    } else {
-      res.send({ success: false, result: "Apikey tidak ditemukan!" });
-    }
-  } else {
-    res.send({ success: false, result: "Parameter tidak valid!" });
-  }
-});
 
 // User Agent Parser
 app.get("/ua", function (req, res) {

@@ -15,6 +15,14 @@ app.use(
   })
 );
 
+app.get("/", (req, res) => {
+  res.send({ success: true, author: "Ridwan", contact: "6285156008163" });
+});
+
+app.all("*", (req, res) => {
+  res.send({ success: false, result: "Halaman tidak ditemukan!" });
+});
+
 // User Agent Parser
 app.get("/ua", function (req, res) {
   const agent = req.query.ua;

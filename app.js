@@ -2,12 +2,10 @@ const http = require("http");
 const express = require("express");
 const parser = require("ua-parser-js");
 
-// Setting App
 const app = express();
 const server = http.createServer(app);
 const port = process.env.PORT || 8080;
 
-// Setting Express
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -16,14 +14,9 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  res.status(200).json({
-    status: true,
-    author: "Ridwan",
-    contact: "6285156008163"
-  });
+  res.status(200).json({ status: true, author: "Ridwan", contact: "6285156008163" });
 });
 
-// User Agent Parser
 app.get("/ua", function (req, res) {
   const agent = req.query.agent;
   const ua = parser(agent || req.headers["user-agent"]);
@@ -47,7 +40,7 @@ app.get("/ua", function (req, res) {
 });
 
 app.all("*", (req, res) => {
-  res.status(404).json({ status: false, author: "Page not found!" });
+  res.status(404).json({ status: false, message: "Page not found!" });
 });
 
 server.listen(port, function () {

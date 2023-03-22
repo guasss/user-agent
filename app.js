@@ -16,7 +16,7 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  return res.status(200).json({
+  res.status(200).json({
     status: true,
     author: "Ridwan",
     contact: "6285156008163"
@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
 app.get("/ua", function (req, res) {
   const agent = req.query.agent;
   const ua = parser(agent || req.headers["user-agent"]);
-  return res.status(200).json({
+  res.status(200).json({
     status: true,
     result: {
       user_agent: `${ua.ua}`,
@@ -41,13 +41,13 @@ app.get("/ua", function (req, res) {
       device_vendor: `${ua.device.vendor}`,
       device_model: `${ua.device.model}`,
       device_type: `${ua.device.type}`,
-      cpu_architecture: `${ua.cpu.architecture}`,
-    },
+      cpu_architecture: `${ua.cpu.architecture}`
+    }
   });
 });
 
 app.all("*", (req, res) => {
-  res.send({ success: false, result: "Halaman tidak ditemukan!" });
+  res.status(404).json({ status: false, author: "Page not found!" });
 });
 
 server.listen(port, function () {

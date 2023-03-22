@@ -13,8 +13,8 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.status(200).json({ status: true, author: "Ridwan", contact: "6285156008163" });
+app.get("/", function (req, res) {
+  res.status(200).json({ status: true, author: "Ridwan Maulana", contact: "6285156008163" });
 });
 
 app.get("/ua", function (req, res) {
@@ -39,7 +39,7 @@ app.get("/ua", function (req, res) {
   });
 });
 
-app.all("*", (req, res) => {
+app.all("*", function (req, res) {
   res.status(404).json({ status: false, message: "Page not found!" });
 });
 
